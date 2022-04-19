@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import *
+from django.views.generic import View
 app_name = "home"
 
 # Create your views here.
@@ -15,6 +16,4 @@ class HomeView(BaseView):
         self.view['ads'] = Ad.objects.all()
         self.view['products'] = Product.objects.filter(status= 'active')
 
-        return render(request, 'index-4.html', self.view)
-def home(request):
-    return render(request, 'index-4.html')
+        return render(request, 'shop-index.html', self.view)
