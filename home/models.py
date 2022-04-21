@@ -1,3 +1,4 @@
+from msilib.schema import Class
 from django.db import models
 
 # Create your models here.
@@ -6,7 +7,7 @@ LABELS = (('hot','hot'),('new','new'),('sale','sale'),('','default'))
 
 class Category(models.Model):
     name = models.CharField(max_length= 400)
-    image = models.ImageField(upload_to = 'media')
+    image = models.CharField(max_length= 200)
     slug = models.CharField(max_length= 500, unique= True)
 
     def __str__(self):
@@ -26,6 +27,7 @@ class Slider(models.Model):
     image = models.ImageField(upload_to = 'media')
     title = models.TextField()
     rank = models.IntegerField(default= 1)
+    status = models.CharField(max_length=25, blank=True, choices= (('active','active'),('','default')))
     description = models.TextField(blank= True)
 
     def __str__(self):
