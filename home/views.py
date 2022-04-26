@@ -32,14 +32,17 @@ class CategoryView(BaseView):
     def get(self, request, slug):
         cat_id = Category.objects.get(slug= slug).id
         cat_name = Category.objects.get(slug= slug).name
-        self.view['Cat_products'] = Product.objects.filter(category_id = cat_id)
-        self.view['Category_name'] = cat_name
+        self.view['cat_products'] = Product.objects.filter(category_id = cat_id)
+        self.view['subcats'] = SubCategory.objects.filter(category_id = cat_id)
+        self.view['category_name'] = cat_name
         return render(request, 'category.html', self.view)
 
 class SubCategoryView(BaseView):
     def get(self, request, slug):
         subcat_id = SubCategory.objects.get(slug= slug).id
         subcat_name = SubCategory.objects.get(slug= slug).name
-        self.view['SubCat_products'] = Product.objects.filter(subcategory_id = subcat_id)
-        self.view['SubCategory_name'] = subcat_name
+        cat_id = SubCategory.objects.get(slug= slug).category_id
+        self.view['subcategory'] = SubCategory.objects.filter(category_id = cat_id)
+        self.view['subcat_products'] = Product.objects.filter(subcategory_id = subcat_id)
+        self.view['subcategory_name'] = subcat_name
         return render(request, 'subcategory.html', self.view)
