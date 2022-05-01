@@ -4,7 +4,7 @@
 
     <div class="title-wrapper">
       <div class="container"><div class="container-inner">
-        <h1><span>{{SubCategory_name}}</span> CATEGORY</h1>
+        <h1><span>{{SubCategory_name}}</span>SUB CATEGORY</h1>
         <em>Over 4000 Items are available here</em>
       </div></div>
     </div>
@@ -116,6 +116,7 @@
                     
                     {% if product.discounted_price > 0 %}
                     <div class="pi-price">Rs {{product.discounted_price}}</div>
+                    <em>Rs<span>{{product.price}}</span></em>
                     {% else %}
                     <div class="pi-price">Rs {{product.price}}</div>
                     {% endif %}

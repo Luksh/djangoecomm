@@ -367,10 +367,10 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
             </li>
             
             {% if user.is_authenticated %}
-            <li><a href="" target="_blank">{{user.username}}</a></li>
+            <li><a href="">{{user.username}}</a></li>
             <li><a href="/account/logout">Logout</a></li>
             {% else %}
-            <li><a href="/account/login" target="_blank">Login</a></li>
+            <li><a href="/account/login">Login</a></li>
             <li><a href="/signup">Signup</a></li>
             {% endif %}
               

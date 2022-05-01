@@ -74,7 +74,7 @@ def signup(request):
                 return render(request, 'shop-standard-forms.html')
 
             elif User.objects.filter(email = email).exists():
-                messages.error(request, 'The email is already taken')
+                messages.error(request, 'The email already exists')
                 return render(request, 'shop-standard-forms.html')
 
             else:
