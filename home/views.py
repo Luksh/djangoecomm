@@ -107,6 +107,7 @@ def contact(request):
             message = message
         )
         data.save()
+        return render(request, 'shop-contacts.html', {"message":"Success"})
 
     return render(request, 'shop-contacts.html')
 
@@ -150,7 +151,6 @@ def reducecart(request, slug):
 
 # ----------API----------
 
-from .models import *
 from .serializers import *
 from rest_framework import viewsets
 

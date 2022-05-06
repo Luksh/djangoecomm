@@ -69,8 +69,8 @@ class Product(models.Model):
 
 class Cart(models.Model):
     user = models.CharField(max_length= 400)
-    slug = models.CharField(max_length= 400, blank= True)
-    items = models.ForeignKey(Category, on_delete = models.CASCADE)
+    slug = models.CharField(max_length= 400)
+    items = models.ForeignKey(Product, on_delete = models.CASCADE)
     quantity = models.IntegerField(default= 1)
     total = models.IntegerField(default= 1)
     checkout = models.BooleanField(default= False)

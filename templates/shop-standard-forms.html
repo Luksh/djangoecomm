@@ -34,7 +34,7 @@
                 {% csrf_token %}
                 
                 {% for message in messages %}
-                  <center><font color = "red"></font></center>
+                  <center><font color = "red">{{message}}</font></center>
                 {% endfor %}
                   
                 <div class="form-group">
