@@ -114,27 +114,6 @@ def signup(request):
     return render(request, 'shop-standard-forms.html')
 
 
-def contact(request):
-    if request.method == 'POST':
-        name = request.POST['name']
-        email = request.POST['email']
-        phone = request.POST['phone']
-        subject = request.POST['subject']
-        message = request.POST['message']
-
-        data = Contact.objects.create(
-            name=name,
-            email=email,
-            phone=phone,
-            subject=subject,
-            message=message
-        )
-        data.save()
-        return render(request, 'shop-contacts.html', {"message": "Success"})
-
-    return render(request, 'shop-contacts.html')
-
-
 class CartView(BaseView):
     def get(self, request):
         self.view['cart_product'] = Cart.objects.filter(
@@ -191,13 +170,13 @@ def contact(request):
         name = request.POST['name']
         email = request.POST['email']
         message = request.POST['message']
+
         data = Contact.objects.create(
             name=name,
             email=email,
             message=message,
         )
         data.save()
-
         send_email = EmailMessage(
             'Thank you',
             f'Thank you for messaging us dear {name}',
@@ -205,8 +184,16 @@ def contact(request):
             [email]
         )
         send_email.send()
+        return render(request, 'shop-contacts.html', {"message": "Success"})
 
     return render(request, 'shop-contacts.html')
+
+
+class Checkout(BaseView):
+    def get(self, request):
+        self.view['cart_product'] = Cart.objects.filter(
+            user=request.user.username, checkout=False)
+        return render(request, 'shop-checkout.html', self.view)
 
 # ----------API----------
 
@@ -234,7 +221,7 @@ class ProductCRUDViewSet(APIView):
         try:
             return Product.objects.get(pk=pk)
         except:
-            print('This id is not in database')
+            print('This id is not in the database')
 
     def get(self, request, pk):
         product = self.get_object(pk)
